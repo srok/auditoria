@@ -1,110 +1,129 @@
-angular.module('ionic-camera.controllers', [])
+angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', ['$scope', "CameraPopover", "$ionicActionSheet",function($scope, CameraPopover, $ionicActionSheet){
-    $scope.showProgress = false;
+    .controller('AppCtrl', function ($scope, $state, $ionicModal, $timeout, $q) {
 
-  var uploadFileUrl = "your serve api";
+      $scope.jsBuffer = {
+        Image: undefined
+      };
 
-  $scope.showActionSheet = function(){
-    // Show the action sheet
-    var hideSheet = $ionicActionSheet.show({
-      buttons: [
-        { text: 'Take Photo' },
-        { text: 'Take Phone from albums' }
-      ],
-      // destructiveText: 'Delete',
-      titleText: 'Select photos from',
-      cancelText: 'Cancel',
-      cancel: function() {
-        hideSheet();
-      },
-      buttonClicked: function(index) {
-        // click "take phone"
-        if(index == 0){
-          takePicture({
-            quality : 100,
-            allowEdit : true,
-            targetWidth: 500,
-            targetHeight: 225,
-            // Android doesn't recognize this.
-            // http://stackoverflow.com/questions/29392639/error-capturing-image-with-phonegap-on-android
-            // saveToPhotoAlbum: true,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            encodingType: Camera.EncodingType.JPEG,
-            destinationType: Camera.DestinationType.FILE_URI
-          });
-        }else if(index == 1){
-          takePicture({
-            quality : 100,
-            allowEdit : true,
-            targetWidth: 500,
-            targetHeight: 225,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            encodingType: Camera.EncodingType.JPEG,
-            destinationType: Camera.DestinationType.FILE_URI
-          });
-        }else{
-          return true;
-        }
-        hideSheet();
-      }
-    });
-  };
+      $scope.formControls =
+      {
+        captureEnabled : true,
+        liveRefreshEnabled : false
+      };
 
-  // upload file with a imageURI
-  var uploadFile = function(imageURI){
-    // show the progress bar
-    safeApply( $scope, function(){
-      $scope.showProgress = true;
-    });
-    var uploadOptions = new FileUploadOptions();
-    uploadOptions.fileKey = "avatar";
-    uploadOptions.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-    uploadOptions.mimeType = "image/jpeg";
-    uploadOptions.chunkedMode = false;
+      $scope.cameraPlus = null;
 
-    var ft = new FileTransfer();
+      window.ionic.Platform.ready(function() {
+        console.log('Ionic ready... Loading plugins.');
 
-    var statusDom = document.getElementById("ft-prog");
+        $scope.cameraPlus = ( cordova && cordova.plugins && cordova.plugins.CameraPlus ) ? cordova.plugins.CameraPlus : null;
 
-    ft.onprogress = function(progressEvent) {
-      if (progressEvent.lengthComputable) {
-        var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-        statusDom.value = perc;
-        if(perc == 100){
-          safeApply($scope, function(){
-            $scope.showProgress = false;
-          });
-        }
-      } else {
-        console.log("loading....");
-      }
-    };
-
-    ft.upload(imageURI, encodeURI(uploadFileUrl), onSuccess, onFail, uploadOptions, true);
-
-    function onSuccess(responseData){
-      // FIXME: if use responseData.response.avatar_thumb_url will get a undefined
-      responseString = JSON.stringify(responseData);
-      responseObject = JSON.parse(responseString);
-      responsePerson = JSON.parse(responseObject.response);
-      safeApply($scope, function(){
-        // update your url
-        // $scope.person.avatar_square_url = responsePerson.avatar_square_url;
+        $scope.switchCapture(true);
       });
-    };
-    function onFail(){
-      alert("something wrong, please try again");
-    };
-  };
 
-  //get photos form device and return a file path url
-  var takePicture = function(options) {
-    CameraPopover.getPicture(options).then(function(imageURI){
-      uploadFile(imageURI);
-    }, function(err){
-      console.error(err);
-    });
-  };
 
-}])
+      $scope.switchCapture = function (enabled)
+      {
+        if (enabled)
+        {
+          $scope.startCapture("");
+        }
+        else
+        {
+          $scope.stopCapture();
+        }
+      };
+
+      $scope.startCapture = function() {
+
+        if ( $scope.cameraPlus ) {
+          // call this API to stop web server
+          $scope.cameraPlus.startCamera(function(){
+            console.log('Capture Started');
+
+            // already call once to fill the buffer since it's always delayed of 1 frame...
+            $scope.refreshPreview();
+          },function( error ){
+            console.log('CameraServer StartCapture failed: ' + error);
+          });
+        } else {
+           console.log('CameraServer StartCapture: CameraPlus plugin not available/ready.');
+        }
+      };
+
+      $scope.stopCapture = function() {
+
+        if ( $scope.cameraPlus ) {
+          // call this API to stop web server
+          $scope.cameraPlus.stopCamera(function(){
+            console.log('Capture Stopped');
+          },function( error ){
+            console.log('CameraServer StopCapture failed: ' + error);
+          });
+        } else {
+          console.log('CameraServer StopCapture: CameraPlus plugin not available/ready.');
+        }
+      };
+
+      $scope.switchLiveRefresh = function (enabled)
+      {
+        if (enabled)
+        {
+          $scope.asyncGetImage().then();
+        }
+        else
+        {
+          // stops automatically when !$scope.formControls.liveRefreshEnabled
+        }
+      };
+
+      $scope.getImage = function() {
+        $scope.asyncGetImage().then(function()
+        {
+          if (!$scope.$$phase) {
+            $scope.$apply();
+          }
+        });
+      };
+
+      $scope.refreshPreview = function () {
+        //console.log("refreshPreview");
+        if ($scope.formControls.liveRefreshEnabled) {
+          setTimeout(function () {
+            $scope.$apply(function () {
+              $scope.asyncGetImage().then();
+            });
+          }, 40);
+        }
+      };
+
+      // returns a promise :)
+      $scope.asyncGetImage = function() {
+        return $q(function(resolve, reject) {
+
+          $scope.cameraPlus.getJpegImage(function(jpgData)
+          {
+            if ($scope.jsBuffer.Image != jpgData)
+            {
+              $scope.jsBuffer.Image = jpgData;
+            }
+            else
+            {
+              // it's the same image, we trig the refresh manually.
+              $scope.refreshPreview();
+            }
+
+            resolve(true);
+
+          }, function()
+          {
+              console.log('getImage failed');
+              reject('getImage failed');
+          });
+        });
+      };
+
+    })
+
+;
