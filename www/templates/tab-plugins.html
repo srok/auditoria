@@ -1,0 +1,64 @@
+<ion-view view-title="Test Plugins">
+    <ion-content class="padding">
+        <!--<h2>{{message}}</h2>-->
+
+        <div class="card">
+            <div class="item item-divider">
+                <i class="ion-ios-camera-outline"></i> Camera
+            </div>
+            <div class="item item-text-wrap">
+                <button type="button" class="button button-positive" ng-click="pictureClick()">Get Picture</button>
+                <div>
+                    <img id="cameraImage" />
+                </div>
+            </div>
+            <!--<div class="item item-divider">
+                I'm a Footer in a Card!
+            </div>-->
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                <i class="ion-ios-world-outline"></i> Geolocation
+            </div>
+            <div class="item item-text-wrap">
+                <!-- form -->
+                <ul class="list">
+                    <li>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Timeout</span>
+                            <input type="text" placeholder="" ng-model="posOptions.timeout">
+                        </label>
+                    </li>
+                    <li class="item item-toggle">
+                        Enable High Accuracy
+                        <label class="toggle toggle-positive">
+                            <input type="checkbox" ng-model="posOptions.enableHighAccuracy">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </li>
+                    <li class="item item-button">
+                        <button type="button" class="button button-positive" ng-click="getLocation()">
+                            <span ng-show="!gettingLocation">Get Location</span>
+                            <span ng-show="gettingLocation">One moment...</span>
+                        </button>
+                    </li>
+                    <li class="item">
+                        Result: {{result}}
+                    </li>
+            </div>
+
+
+            <div>
+
+            </div>
+        </div>
+        <!--<div class="item item-divider">
+                I'm a Footer in a Card!
+            </div>-->
+        </div>
+
+    </ion-content>
+</ion-view>

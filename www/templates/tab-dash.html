@@ -1,0 +1,44 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <h2>{{message}}</h2>
+
+    <div class="item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="New Todo" ng-model="item.name">
+      </label>
+      <button class="button button-balanced button-small" ng-click="addItem()">
+        Add Todo
+      </button>
+    </div>
+
+    <ion-list show-delete="false" show-reorder="false" can-swipe="true">
+      <ion-item ng-repeat="item in allItems | orderBy:'id':true track by $index">
+        <span style="width:25%; display: inline-block;">{{$index}}</span>
+        <span style="width:25%; display: inline-block;">{{item.name}}</span>
+        <span style="width:25%; display: inline-block;">{{item.id}}</span>
+
+        <ion-option-button class="button-balanced" ng-click="allItems.splice($index, 0, item)">
+          Copy
+        </ion-option-button>
+
+        <ion-option-button class="button-assertive" ng-click="allItems.splice($index, 1)">
+          Delete
+        </ion-option-button>
+
+      </ion-item>
+    </ion-list>
+    <!--    
+    <p>
+    This is the Ionic starter for tabs-based apps. For other starters and ready-made templates, check out the <a href="http://market.ionic.io/starters" target="_blank">Ionic Market</a>.
+    </p>
+    <p>
+      To edit the content of each tab, edit the corresponding template file in <code>www/templates/</code>. This template is <code>www/templates/tab-dash.html</code>
+    </p>
+    <p>
+    If you need help with your app, join the Ionic Community on the <a href="http://forum.ionicframework.com" target="_blank">Ionic Forum</a>. Make sure to <a href="http://twitter.com/ionicframework" target="_blank">follow us</a> on Twitter to get important updates and announcements for Ionic developers.
+    </p>
+    <p>
+      For help sending push notifications, join the <a href="https://apps.ionic.io/signup" target="_blank">Ionic Platform</a> and check out <a href="http://docs.ionic.io/docs/push-overview" target="_blank">Ionic Push</a>. We also have other services available.
+    </p>-->
+  </ion-content>
+</ion-view>
