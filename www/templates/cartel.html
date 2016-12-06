@@ -1,7 +1,8 @@
 <ion-view title="ACA Salud - Catamarca 2293" id="page7">
   <ion-content padding="true" class="has-header">
     <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-      <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+      <img ng-src="image_src" ng-show="image_src">
+      <i class="icon ion-image" ng-hide="image_src" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
     </div>
     <button id="cartel-button5" class="button button-positive  button-block" ng-click="takePicture();">Tomar fotografía</button>
     <form id="cartel-form2" class="list">

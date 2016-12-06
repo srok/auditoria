@@ -48,15 +48,15 @@ function ($scope,  $stateParams) {
 	
 	$scope.takePicture= function() {
 		alert( 'apretaste el boton :)' );
-		navigator.camera.getPicture( function( imageURI ) {
-			alert( imageURI );
+		navigator.camera.getPicture( function( DATA_URL ) {
+			$scope.image_src='data:image/jpg;base64,'+DATA_URL;
 		},
 		function( message ) {
 			alert( message );
 		},
 		{
 			quality: 50,
-			destinationType: Camera.DestinationType.FILE_URI
+			destinationType: Camera.DestinationType.DATA_URL
 		});
 	};
 
