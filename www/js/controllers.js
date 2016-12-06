@@ -43,23 +43,23 @@ function ($scope, $stateParams) {
 .controller('cartelCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $cordovaCamera, $stateParams) {
+function ($scope,  $stateParams) {
 
-	var options = {
-		quality: 100,
-		destinationType: Camera.DestinationType.FILE_URI,
-		sourceType: Camera.PictureSourceType.CAMERA,
-		encodingType: Camera.EncodingType.JPEG,
-		cameraDirection: 1,
-		saveToPhotoAlbum: true
-	};
+	$scope.takePicture = function (options) {
 	
-	$cordovaCamera.getPicture(options).then(function(imagePath){
-		console.log(imagePath);
-	}, function(error){
-		console.log(error);
+      var options = {
+         quality : 75,
+         targetWidth: 200,
+         targetHeight: 200,
+         sourceType: 1
+      };
 
-  //An error occured
-});
+      Camera.getPicture(options).then(function(imageData) {
+         $scope.picture = imageData;;
+      }, function(err) {
+         console.log(err);
+      });
+		
+   };
 
 }])
