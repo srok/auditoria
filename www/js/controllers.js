@@ -46,7 +46,7 @@ function ($scope, $stateParams) {
 function ($scope,  $stateParams) {
 
 	
-	$scope.takePicture: function() {
+	$scope.takePicture= function() {
 		alert( 'apretaste el boton :)' );
 		navigator.camera.getPicture( function( imageURI ) {
 			alert( imageURI );
