@@ -16,7 +16,6 @@
         PhoneGap Team
     </author>
 
-    <preference name="phonegap-version" value="3.0.0" /> 
+    <plugin name="cordova-plugin-camera" spec="~2.3.0" />
 
-    <gap:plugin name="org.apache.cordova.core.camera" />
 </widget>
