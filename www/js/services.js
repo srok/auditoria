@@ -1,28 +1,19 @@
-angular.module('app.services', [])
+angular.module('app.services', []);
 
-.factory('BlankFactory', [function(){
+// .factory('Camera', function($q) {
 
-}])
+//    return {
+//       getPicture: function(options) {
+//          var q = $q.defer();
 
-.factory('Camera', function($q) {
+//          navigator.camera.getPicture(function(result) {
+//             q.resolve(result);
+//          }, function(err) {
+//             q.reject(err);
+//          }, options);
 
-   return {
-      getPicture: function(options) {
-         var q = $q.defer();
+//          return q.promise;
+//       }
+//    }
 
-         navigator.camera.getPicture(function(result) {
-            q.resolve(result);
-         }, function(err) {
-            q.reject(err);
-         }, options);
-
-         return q.promise;
-      }
-   }
-
-})
-
-.service('BlankService', [function(){
-
-}]);
-
+// });

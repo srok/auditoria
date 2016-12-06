@@ -45,21 +45,19 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope,  $stateParams) {
 
-	$scope.takePicture = function (options) {
 	
-      var options = {
-         quality : 75,
-         targetWidth: 200,
-         targetHeight: 200,
-         sourceType: 1
-      };
-
-      Camera.getPicture(options).then(function(imageData) {
-         $scope.picture = imageData;;
-      }, function(err) {
-         console.log(err);
-      });
-		
-   };
+	$scope.takePicture: function() {
+		alert( 'apretaste el boton :)' );
+		navigator.camera.getPicture( function( imageURI ) {
+			alert( imageURI );
+		},
+		function( message ) {
+			alert( message );
+		},
+		{
+			quality: 50,
+			destinationType: Camera.DestinationType.FILE_URI
+		});
+	};
 
 }])
