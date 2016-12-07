@@ -48,10 +48,10 @@ function ($scope,  $stateParams) {
 	$scope.image_src='';
 
 	$scope.takePicture= function() {
-
-		navigator.camera.getPicture( function( FILE_URI ) {
-			alert(FILE_URI);
-			$scope.image_src=FILE_URI;
+		//$scope.image_src='file:///E:/Fotos/DSC_0047.jpg';
+		navigator.camera.getPicture( function( NATIVE_URI ) {
+			alert(NATIVE_URI);
+			$scope.image_src=NATIVE_URI;
 
 		},
 		function( message ) {
@@ -59,7 +59,7 @@ function ($scope,  $stateParams) {
 		},
 		{
 			quality: 50,
-			destinationType: Camera.DestinationType.FILE_URI
+			destinationType: Camera.DestinationType.NATIVE_URI
 		});
 	};
 
