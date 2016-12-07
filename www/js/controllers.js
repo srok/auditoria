@@ -52,12 +52,14 @@ function ($scope,  $stateParams) {
 		$scope.lat='';
 		$scope.long='';
 		navigator.camera.getPicture( function( NATIVE_URI ) {
-			alert(NATIVE_URI);
+			
 			$scope.image_src=NATIVE_URI;
 
 			navigator.geolocation.getCurrentPosition(function(location){//exito
 				$scope.lat=location.coords.altitude;
 				$scope.long=location.coords.longitude;
+				$scope.$apply();
+				alert(location);
 			},
                                         function (error){
                                         	alert(error);
