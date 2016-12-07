@@ -49,7 +49,8 @@ function ($scope,  $stateParams) {
 
 	$scope.takePicture= function() {
 		$scope.image_src='http://placehold.it/1024x768';
-		
+		$scope.lat='';
+		$scope.long='';
 		navigator.camera.getPicture( function( NATIVE_URI ) {
 			alert(NATIVE_URI);
 			$scope.image_src=NATIVE_URI;
