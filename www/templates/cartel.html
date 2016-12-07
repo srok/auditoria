@@ -1,14 +1,22 @@
 <ion-view title="ACA Salud - Catamarca 2293" id="page7">
   <ion-content padding="true" class="has-header">
-    <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-      <img ng-src="{{image_src}}" ng-show="image_src">
+    <div style="margin: 0px; background-color: rgb(232, 235, 239); text-align: center;">
+      <img ng-src="{{image_src}}" ng-show="image_src" class="image-responsive">
       <i class="icon ion-image" ng-hide="image_src" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
     </div>
     <button id="cartel-button5" class="button button-positive  button-block" ng-click="takePicture();">Tomar fotografía</button>
     <form id="cartel-form2" class="list">
       <label class="item item-input" id="cartel-input11">
-        <span class="input-label">Cliente</span>
-        <input type="text" placeholder="Archivo" ng-model="image_src" readonly="readonly">
+        <span class="input-label">Imágen</span>
+        <input type="text" placeholder="Haga click en tomar fotografía" ng-model="image_src" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input11">
+        <span class="input-label">Latitud</span>
+        <input type="text" placeholder="Latitud" ng-model="lat" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input11">
+        <span class="input-label">Longitud</span>
+        <input type="text" placeholder="Longitud" ng-model="long" readonly="readonly">
       </label>
       <label class="item item-input" id="cartel-input4">
         <span class="input-label">Cliente</span>

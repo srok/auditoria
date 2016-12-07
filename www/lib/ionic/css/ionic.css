@@ -9282,6 +9282,10 @@ a.button {
 /* will trigger the flex-direction to */
 /* change to column and add some margin */
 /* to any columns in the row for clearity */
+.image-responsive{
+  width:100%;
+  height:auto;
+}
 @media (max-width: 567px) {
   .responsive-sm {
     -webkit-box-direction: normal;

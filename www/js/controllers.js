@@ -48,11 +48,21 @@ function ($scope,  $stateParams) {
 	$scope.image_src='';
 
 	$scope.takePicture= function() {
-		//$scope.image_src='file:///E:/Fotos/DSC_0047.jpg';
+		$scope.image_src='http://placehold.it/1024x768';
+		
 		navigator.camera.getPicture( function( NATIVE_URI ) {
 			alert(NATIVE_URI);
 			$scope.image_src=NATIVE_URI;
 
+			navigator.geolocation.getCurrentPosition(function(location){//exito
+				$scope.lat=location.coords.altitude;
+				$scope.long=location.coords.longitude;
+			},
+                                        function (error){
+                                        	alert(error);
+                                        });
+
+			$scope.$apply();
 		},
 		function( message ) {
 			alert( message );
