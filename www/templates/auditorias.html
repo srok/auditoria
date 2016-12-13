@@ -1,0 +1,14 @@
+<ion-view id="page2">
+  <ion-nav-title>Auditorias de {{campana.nombre}}: {{cartel.direccion}}</ion-nav-title>
+
+  <ion-content padding="true" class="has-header">
+    <ion-list id="campanas-list4" ng-repeat="auditoria in auditorias">
+
+      <ion-item class="item-icon-right" id="campanas-list-item9" ui-sref="tabsController.auditoria({auditoria: {{auditoria.id}}})">{{auditoria.fecha}}
+        <i class="icon ion-chevron-right" ></i>
+      </ion-item>
+     
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -21,12 +21,35 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.campana', {
-    url: '/campana/1',
+    url: '/campana',
     views: {
       'tab1': {
         templateUrl: 'templates/campana.html',
         controller: 'campanaCtrl'
       }
+    },params: {
+    campana: null
+    }
+  })
+  .state('tabsController.auditorias', {
+    url: '/auditorias',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/auditorias.html',
+        controller: 'auditoriasCtrl'
+      }
+    },params: {
+    cartel: null
+    }
+  }).state('tabsController.auditoria', {
+    url: '/auditoria',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/auditoria.html',
+        controller: 'auditoriaCtrl'
+      }
+    },params: {
+    auditoria: null
     }
   })
 
@@ -59,6 +82,9 @@ angular.module('app.routes', [])
         templateUrl: 'templates/cartel.html',
         controller: 'cartelCtrl'
       }
+    },params: {
+    campana: null,
+    cartel: null
     }
   })
 

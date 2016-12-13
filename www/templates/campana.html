@@ -1,22 +1,17 @@
 <ion-view title="Detalle de la campaña" id="page6">
   <ion-content padding="true" class="has-header">
-    <h1 id="campana-heading1" style="color:#000000;">Campaña 1</h1>
+    <h1 id="campana-heading1" style="color:#000000;">{{campana.nombre}}</h1>
     <div class="list card" id="campana-card21">
-      <ion-item id="campana-list-item17">ACA Salud</ion-item>
+      <ion-item id="campana-list-item17">{{cliente.razon_social}}</ion-item>
       <div class="item item-body" id="campana-list-item-container2">
-        <ion-list id="campana-list5">
-          <ion-item class="item-icon-left item-icon-right" id="campana-list-item12" ui-sref="tabsController.cartel">
-            <i class="icon ion-android-checkbox"></i>Catamarca y lagos
+        <ion-list id="campana-list5" ng-repeat="cartel in carteles"   >
+           <ion-item class="item-icon-right" id="campana-list-item12" ui-sref="tabsController.cartel({campana: {{campana.id}},cartel: {{cartel.id}}})">{{cartel.direccion}}
             <i class="icon ion-chevron-right"></i>
+            <ion-option-button class="button-positive" ui-sref="tabsController.auditorias({cartel: {{cartel.id}}})">Historial</ion-option-button>
+
           </ion-item>
-          <ion-item class="item-icon-left item-icon-right" id="campana-list-item13" ui-sref="tabsController.cartel">
-            <i class="icon ion-android-checkbox-outline-blank"></i>Roca 1993
-            <i class="icon ion-chevron-right"></i>
-          </ion-item>
-          <ion-item class="item-icon-left item-icon-right" id="campana-list-item14" ui-sref="tabsController.cartel">
-            <i class="icon ion-android-checkbox-outline-blank"></i>Pellegrini 1550
-            <i class="icon ion-chevron-right"></i>
-          </ion-item>
+
+
         </ion-list>
       </div>
     </div>

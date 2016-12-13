@@ -1,14 +1,11 @@
 <ion-view title="Mis Campañas" id="page2">
   <ion-content padding="true" class="has-header">
-    <ion-list id="campanas-list4">
-      <ion-item class="item-icon-right" id="campanas-list-item9" ui-sref="tabsController.campana">Campaña 1
-        <i class="icon ion-chevron-right"></i>
+    <ion-list id="campanas-list4" ng-repeat="campana in campanas">
+
+      <ion-item class="item-icon-right" id="campanas-list-item9" ui-sref="tabsController.campana({campana: {{campana.id}}})">{{campana.nombre}}
+        <i class="icon ion-chevron-right" ></i>
       </ion-item>
-      <ion-item class="item-icon-right" id="campanas-list-item10" ui-sref="tabsController.campana">Campaña 2
-        <i class="icon ion-chevron-right"></i>
-      </ion-item>
-      <ion-item class="item-icon-right" id="campanas-list-item11" ui-sref="tabsController.campana">Campaña 3
-        <i class="icon ion-chevron-right"></i>
+     
       </ion-item>
     </ion-list>
   </ion-content>

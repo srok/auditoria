@@ -5,6 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+var base_url='https://90.0.0.1/identhya/audit/back-end';
+
 angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services',])
 
 .config(function($ionicConfigProvider, $sceDelegateProvider){
@@ -14,7 +16,8 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,DB) {
+  DB.init();
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -52,3 +55,85 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
         }]
     };
 }])
+
+
+angular.module('app.config', [])
+.constant('DB_CONFIG', {
+    name: 'DB',
+    tables: [
+      {
+            name: 'carteles',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'campana_id', type: 'integer'},
+                {name: 'fecha_max', type: 'text'},
+                {name: 'direccion', type: 'text'},
+                {name: 'cartel_lat', type: 'text'},
+                {name: 'cartel_long', type: 'text'},
+                {name: 'soporte_id', type: 'integer'},
+                {name: 'empresa_id', type: 'integer'},
+                {name: 'ws_status', type: 'text'},
+                {name: 'ws_sync_date', type: 'text'},
+            ]
+        },
+        {
+            name: 'auditorias',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'cliente_id', type: 'integer'},
+                {name: 'campana_id', type: 'integer'},
+                {name: 'cartel_id', type: 'integer'},
+                {name: 'fecha_max', type: 'text'},
+                {name: 'direccion', type: 'text'},
+                {name: 'cartel_lat', type: 'text'},
+                {name: 'cartel_long', type: 'text'},
+                {name: 'soporte_id', type: 'integer'},
+                {name: 'empresa_id', type: 'integer'},
+                {name: 'estado_id', type: 'integer'},
+                {name: 'observaciones', type: 'text'},
+                {name: 'foto_uri', type: 'text'},
+                {name: 'foto_lat', type: 'text'},
+                {name: 'foto_long', type: 'text'},
+                {name: 'fecha', type: 'text'},
+                {name: 'ws_status', type: 'text'},
+                {name: 'ws_sync_date', type: 'text'},
+            ]
+        },
+        {
+            name: 'campanas',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'cliente_id', type: 'integer'},
+                {name: 'nombre', type: 'text'},
+            ]
+        },
+        {
+            name: 'estados',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'nombre', type: 'text'},
+            ]
+        },
+        {
+            name: 'empresas_publi',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'nombre', type: 'text'},
+            ]
+        },
+        {
+            name: 'soportes',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'nombre', type: 'text'},
+            ]
+        },
+        {
+            name: 'clientes',
+            columns: [
+                {name: 'id', type: 'integer primary key'},
+                {name: 'razon_social', type: 'text'},
+            ]
+        }
+    ]
+});

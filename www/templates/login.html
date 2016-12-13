@@ -1,19 +1,25 @@
 <ion-view title="Iniciar sesión" id="page5">
   <ion-content padding="true" class="has-header">
+    <div class="card" ng-hide="data.status">
+      <div class="item item-text-wrap">
+      Instroduzca un usuario válido.
+      </div>
+    </div>
     <form id="login-form1" class="list">
       <ion-list id="login-list1">
         <label class="item item-input" id="login-input1">
           <span class="input-label">Email</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="" ng-model="data.mail">
         </label>
         <label class="item item-input" id="login-input2">
           <span class="input-label">Password</span>
-          <input type="password" placeholder="">
+          <input type="password" placeholder="" ng-model="data.pass">
         </label>
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
-      <a ui-sref="tabsController.campanas" id="login-button1" class="button button-stable  button-block">Ingresar</a>
-      <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class="button button-positive  button-block button-clear">Solicitar reseteo de contraseña</a>
+      <a  ng-click="login()" id="login-button1" class="button button-stable  button-block">Ingresar</a>
+      <!-- ui-sref="tabsController.campanas" -->
+      <a href="#" onclick="return false;" id="login-button2" class="button button-positive  button-block button-clear">Solicitar reseteo de contraseña</a>
     </form>
   </ion-content>
 </ion-view>
