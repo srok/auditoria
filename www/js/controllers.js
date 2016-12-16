@@ -248,6 +248,10 @@ angular.module('app.controllers', [])
 			Auditorias.getNews().then(function(auditorias){
 				var total=auditorias.length;
 				var actual=0;
+				if(total=0){
+					$scope.data.sincronizando=false;
+					alert('no hay nada para actualizar');
+				}
 				for(var j=0;j<auditorias.length;j++){
 					
 					var win = function (r) {
@@ -260,9 +264,13 @@ angular.module('app.controllers', [])
 							Auditorias.update(audit);
 						}
 						actual++;
+						alert(actual);
+						alert(total);
 						if(actual==total){
 							$scope.data.sincronizando=false;
-
+							alert('llego');
+						}else{
+							alert('todavia falta');
 						}
 					}
 
