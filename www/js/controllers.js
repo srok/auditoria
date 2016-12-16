@@ -57,39 +57,45 @@ angular.module('app.controllers', [])
 		});
 
 	})
-	.controller('campanasCtrl',
+	.controller('sincronizandoCtrl',
+		function ($scope, $stateParams,Campana) {
+			
+
+		}).controller('campanasCtrl',
 		function ($scope, $stateParams,Campana) {
 			$scope.campanas={};
 			Campana.all().then(function(campanas){
 				$scope.campanas=campanas;
+				$scope.campanas_total=campanas.length;
+				$scope.$apply();
 			});
 
 		})
 
-	.controller('campanaCtrl',
-		function ($scope, $stateParams,Campana,Clientes,Carteles) {
+		.controller('campanaCtrl',
+			function ($scope, $stateParams,Campana,Clientes,Carteles) {
 
-			$scope.itemButtons = [
-			{
-				text: 'Edit',
-				type: 'button-assertive',
-				onTap: function(item) {
-					alert('Edit Item: ' + item.id);
+				$scope.itemButtons = [
+				{
+					text: 'Edit',
+					type: 'button-assertive',
+					onTap: function(item) {
+						alert('Edit Item: ' + item.id);
+					}
+				},
+				{
+					text: 'Share',
+					type: 'button-calm',
+					onTap: function(item) {
+						alert('Share Item: ' + item.id);
+					}
 				}
-			},
-			{
-				text: 'Share',
-				type: 'button-calm',
-				onTap: function(item) {
-					alert('Share Item: ' + item.id);
-				}
-			}
-			];
+				];
 
-			var cId = $stateParams.campana;
-			$scope.campana={};
-			$scope.cliente={};
-			$scope.carteles={};
+				var cId = $stateParams.campana;
+				$scope.campana={};
+				$scope.cliente={};
+				$scope.carteles={};
 		//pido la campaña
 		Campana.getById(cId).then(function(campana){
 			//pido el cliente
@@ -110,28 +116,31 @@ angular.module('app.controllers', [])
 
 	})
 
-	.controller('sincronizarCtrl',
-		function ($scope, $stateParams,$http,Campana,Carteles,Clientes,Soportes,Empresas_publi,Estados,Auditorias) {
-			$scope.download=function(){
+		.controller('sincronizarCtrl',
+			function ($scope, $stateParams,$state,$http,Campana,Carteles,Clientes,Soportes,Empresas_publi,Estados,Auditorias) {
+				$scope.data={sincronizando:false};
 
 
-				Campana.deleteAll().then(function(campanas){
+				$scope.download=function(){
 
-					$http.get(base_url+'/api/campanas/')
-					.success(function(data, status, headers,config){
-						for(j=0;j<data.length;j++){
+
+					Campana.deleteAll().then(function(campanas){
+
+						$http.get(base_url+'/api/campanas/')
+						.success(function(data, status, headers,config){
+							for(j=0;j<data.length;j++){
 			//meto las campanas
 			Campana.insert(data[j]);
 		}
 	})
-					.error(function(data, status, headers,config){
-						console.log('error');
-						console.log(data);
-						console.log(status);
-						console.log('error');
+						.error(function(data, status, headers,config){
+							console.log('error');
+							console.log(data);
+							console.log(status);
+							console.log('error');
 
-					});								
-				});
+						});								
+					});
 
 
 
@@ -235,20 +244,28 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.upload=function(){
-
+			$scope.data.sincronizando=true;
 			Auditorias.getNews().then(function(auditorias){
-
+				var total=auditorias.length;
+				var actual=1;
 				for(var j=0;j<auditorias.length;j++){
 					
 					var win = function (r) {
 						alert("Code = " + r.responseCode);
 						alert("Response = " + r.response);
 						alert("Sent = " + r.bytesSent);
-					// audit=data.config.data;
-					// 	//actualizo la campana subida
-					// audit.ws_status=1;
-					// audit.ws_sync_date=new Date().toISOString().slice(0, 19).replace('T', ' ');
-					// Auditorias.update(audit);
+						if(r.responseCode==201){
+							audit=data.config.data;
+							//actualizo la campana subida
+							audit.ws_status=1;
+							audit.ws_sync_date=new Date().toISOString().slice(0, 19).replace('T', ' ');
+							Auditorias.update(audit);
+						}
+						total++;
+						if(actual>total){
+							$scope.data.sincronizando=false;
+
+						}
 					}
 
 					var fail = function (error) {
@@ -271,7 +288,7 @@ angular.module('app.controllers', [])
 					var ft = new FileTransfer();
 					ft.upload(fileURL, encodeURI(base_url+'/api/auditorias/'), win, fail, options);
 
-			}
+				}
 				// for(var j=0;j<auditorias.length;j++){
 
 				// 	$http.post(base_url+'/api/auditorias/', auditorias[j]).then(function(data, status, headers,config){
@@ -345,9 +362,8 @@ angular.module('app.controllers', [])
 
 	$scope.checkLogin=function(){
 
-		//acá llamariamos al webservice
 		if(localStorage.getItem('active')==1){
-			$state.go('tabsController.campanas');
+			$state.go('tabsController.sincronizar');
 			return true;
 		}
 		u=localStorage.getItem('email');

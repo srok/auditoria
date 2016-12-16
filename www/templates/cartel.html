@@ -5,7 +5,7 @@
       <img ng-src="{{image_src}}" ng-show="image_src" class="image-responsive">
       <i class="icon ion-image" ng-hide="image_src" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
     </div>
-    <button id="cartel-button5" class="button button-positive  button-block" ng-click="takePicture();">Tomar fotografía</button>
+    <button id="cartel-button5" class="button button-assertive  button-block" ng-click="takePicture();">Tomar fotografía</button>
     <form id="cartel-form2" class="list">
       <label class="item item-input" id="cartel-input11">
         <span class="input-label">Imágen</span>
@@ -46,9 +46,11 @@
       </label>
       <label class="item item-input item-stacked-label" id="cartel-input10">
         <span class="input-label">Observaciones</span>
-        <input type="text" placeholder="Observaciones" ng-model="auditoria.observaciones">
+        <textarea placeholder="Observaciones" rows="5" ng-model="auditoria.observaciones">
+          
+        </textarea>
       </label>
-      <button id="cartel-button6" class="button button-positive  button-block" ng-click="guardarAuditoria();">Guardar auditoría</button>
+      <button id="cartel-button6" class="button button-assertive  button-block" ng-click="guardarAuditoria();">Guardar auditoría</button>
     </form>
   </ion-content>
 </ion-view>

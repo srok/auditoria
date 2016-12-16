@@ -10,7 +10,15 @@ angular.module('app.routes', [])
     
   
 
-      .state('tabsController.campanas', {
+      .state('tabsController.sincronizando', {
+    url: '/sincronizando',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/sincronizando.html',
+        controller: 'sincronizandoCtrl'
+      }
+    }
+  }) .state('tabsController.campanas', {
     url: '/campanas',
     views: {
       'tab1': {

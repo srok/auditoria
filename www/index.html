@@ -18,6 +18,7 @@
 
     
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     
 
     <style type="text/css">
@@ -82,6 +83,14 @@
       </ion-header-bar>
       <ion-content ng-controller="menuCtrl" padding="false" class="side-menu-left has-header ">
         <ion-list id="menu-list7" data-componentid="list7">
+          <ion-item id="menu-list-item21" >
+            <div class="row">
+              <div class="col"></div>
+         
+              <div class="col col-60">  <img src="img/logo.png" width="100%"></div>
+              <div class="col"></div>
+            </div>
+          </ion-item>
           <ion-item id="menu-list-item22" ui-sref="tabsController.campanas" menu-close="" data-componentid="list-item22">Mis campañas</ion-item>
           <ion-item id="menu-list-item23" ui-sref="tabsController.sincronizar" menu-close="" data-componentid="list-item23">Sincronizar</ion-item>
           <ion-item id="menu-list-item24" ng-click="logOut();" menu-close="" data-componentid="list-item24">Salir</ion-item>
