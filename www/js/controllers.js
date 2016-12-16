@@ -251,9 +251,7 @@ angular.module('app.controllers', [])
 				for(var j=0;j<auditorias.length;j++){
 					
 					var win = function (r) {
-						alert("Code = " + r.responseCode);
-						alert("Response = " + r.response);
-						alert("Sent = " + r.bytesSent);
+					
 						if(r.responseCode==201){
 							audit=data.config.data;
 							//actualizo la campana subida
@@ -262,7 +260,7 @@ angular.module('app.controllers', [])
 							Auditorias.update(audit);
 						}
 						total++;
-						if(actual>total){
+						if(actual==total){
 							$scope.data.sincronizando=false;
 
 						}
@@ -444,7 +442,7 @@ angular.module('app.controllers', [])
 })
 
 .controller('cartelCtrl',
-	function ($scope,  $stateParams,Campana,Clientes,Carteles,Soportes,Empresas_publi,Estados,Auditorias) {
+	function ($scope,  $stateParams,$ionicHistory,Campana,Clientes,Carteles,Soportes,Empresas_publi,Estados,Auditorias) {
 
 
 		var campanaId = $stateParams.campana;
@@ -510,6 +508,7 @@ angular.module('app.controllers', [])
 			}
 
 			Auditorias.insert($scope.auditoria);
+			$ionicHistory.backView();
 		};
 
 		//aca arranca lo de la foto y la geoposicionacióncita:
