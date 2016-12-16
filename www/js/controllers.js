@@ -247,7 +247,7 @@ angular.module('app.controllers', [])
 			$scope.data.sincronizando=true;
 			Auditorias.getNews().then(function(auditorias){
 				var total=auditorias.length;
-				var actual=1;
+				var actual=0;
 				for(var j=0;j<auditorias.length;j++){
 					
 					var win = function (r) {
@@ -259,7 +259,7 @@ angular.module('app.controllers', [])
 							audit.ws_sync_date=new Date().toISOString().slice(0, 19).replace('T', ' ');
 							Auditorias.update(audit);
 						}
-						total++;
+						actual++;
 						if(actual==total){
 							$scope.data.sincronizando=false;
 
@@ -267,9 +267,7 @@ angular.module('app.controllers', [])
 					}
 
 					var fail = function (error) {
-						alert("An error has occurred: Code = " + error.code);
-						alert("An error has occurred: upload error target = " + error.target);
-						alert("An error has occurred: "+error);
+						
 						console.log("upload error source " + error.source);
 						console.log("upload error target " + error.target);
 					}
@@ -507,8 +505,11 @@ angular.module('app.controllers', [])
 
 			}
 
-			Auditorias.insert($scope.auditoria);
-			$ionicHistory.backView();
+			Auditorias.insert($scope.auditoria).then(function (){
+			$ionicHistory.goBack();
+
+			});
+			
 		};
 
 		//aca arranca lo de la foto y la geoposicionacióncita:
@@ -525,7 +526,7 @@ angular.module('app.controllers', [])
 			$scope.$apply();
 		},
 		function (error){
-			alert(error);
+			//alert(error);
 		});
 
 		navigator.camera.getPicture( function( NATIVE_URI ) {
