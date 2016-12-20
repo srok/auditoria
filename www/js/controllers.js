@@ -244,8 +244,9 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.upload=function(){
-			$scope.data.sincronizando=true;
+			// $scope.data.sincronizando=true;
 			Auditorias.getNews().then(function(auditorias){
+				alert(auditorias);
 				var total=auditorias.length;
 				var actual=0;
 				if(total=0){
@@ -255,6 +256,8 @@ angular.module('app.controllers', [])
 				for(var j=0;j<auditorias.length;j++){
 					
 					var win = function (r) {
+						alert('subio');
+						alert(r);
 					
 						if(r.responseCode==201){
 							audit=data.config.data;
@@ -267,7 +270,7 @@ angular.module('app.controllers', [])
 						alert(actual);
 						alert(total);
 						if(actual==total){
-							$scope.data.sincronizando=false;
+							// $scope.data.sincronizando=false;
 							alert('llego');
 						}else{
 							alert('todavia falta');
@@ -275,7 +278,8 @@ angular.module('app.controllers', [])
 					}
 
 					var fail = function (error) {
-						
+						alert('fallo');
+						alert(error);
 						console.log("upload error source " + error.source);
 						console.log("upload error target " + error.target);
 					}
