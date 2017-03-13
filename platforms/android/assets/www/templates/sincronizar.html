@@ -1,0 +1,28 @@
+<ion-view title="Sincronizar" id="page3">
+	<ion-content padding="true" class="has-header">
+		<div class="card">
+			<div class="item item-text-wrap">
+				Recuerde subir periódicamente las auditorias al servidor para ahorrar datos. {{data.sincronizando}}
+			</div>
+		</div>
+		<div class="card" ng-show="data.sincronizando">
+			<div class="item item-text-wrap">
+				<div class="row">
+					<div class="col text-center"> 	<ion-spinner></ion-spinner></div>
+				</div>
+			</div>
+
+			<div class="item item-text-wrap" >
+				Sincronizando datos de auditorías, no apague el dispositivo.
+			</div>
+		</div>
+		<button id="sincronizar-button3" class="button button-balanced  button-block" ng-click="upload();" ng-show="!data.sincronizando">Subir auditorías</button>
+		<div class="card">
+			<div class="item item-text-wrap">
+				La descarga de datos creará las nuevas campañas asignadas a su usuario y eliminará aquellas que ya fueron auditadas o que caducaron. 
+			</div>
+		</div>
+		<button id="sincronizar-button5" class="button button-assertive  button-block" ng-click="download();">Descargar datos nuevos</button>
+
+	</ion-content>
+</ion-view>

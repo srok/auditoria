@@ -1,0 +1,17 @@
+ion-content{
+    background-position:fixed;
+	background-image:url('../img/background.png');	
+}
+.item-complex.item-icon-right .item-content{
+	background-color:#EDEEF0;
+}
+.icon {
+	color:#A50031;
+}
+.item-text-wrap{
+	 font-size: .9em;
+}
+.image-responsive{
+	width:100%;
+	height:auto;
+}

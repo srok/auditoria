@@ -1,0 +1,17 @@
+<ion-view title="Mis Campañas" id="page2">
+  <ion-content padding="true" class="has-header">
+  <div class="card">
+			<div class="item item-text-wrap">
+				Seleccione la campaña que desea auditar
+			</div>
+		</div>
+    <ion-list id="campanas-list4" ng-repeat="campana in campanas">
+
+      <ion-item class="item-icon-right" id="campanas-list-item9" ui-sref="tabsController.campana({campana: {{campana.id}}})">{{campana.nombre}}
+        <span class="badge badge-assertive">{{campanas_total}}</span>
+      </ion-item>
+     
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

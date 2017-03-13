@@ -1,0 +1,29 @@
+<ion-view title="Detalle de la campaña" id="page6">
+  <ion-content padding="true" class="has-header">
+    <h3 id="campana-heading1" style="color:#000000;">{{campana.nombre}}</h3>
+    <div class="list card" id="campana-card21">
+      <ion-item id="campana-list-item17">{{cliente.razon_social}}</ion-item>
+      <div class="item item-body" id="campana-list-item-container2">
+      
+        <div class="card">
+          <div class="item item-text-wrap">
+            Para ver las auditorias anteriores deslice el item a la izquierda
+          </div>
+        </div>
+
+        <ion-list id="campana-list5" ng-repeat="cartel in carteles"   >
+
+         <ion-item class="item-icon-right" id="campana-list-item12" ui-sref="tabsController.cartel({campana: {{campana.id}},cartel: {{cartel.id}}})">
+          
+         {{cartel.direccion}}
+          <i class="icon ion-chevron-right"></i>
+          <ion-option-button class="button-positive" ui-sref="tabsController.auditorias({cartel: {{cartel.id}}})">Historial</ion-option-button>
+
+        </ion-item>
+
+
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
+</ion-view>

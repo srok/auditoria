@@ -1,0 +1,52 @@
+<ion-view id="page7">
+  <ion-nav-title>{{campana.nombre}} - {{auditoria.direccion}}</ion-nav-title>
+  <ion-content padding="true" class="has-header">
+    <div style="margin: 0px; background-color: rgb(232, 235, 239); text-align: center;">
+      <img ng-src="{{auditoria.foto_uri}}" ng-show="auditoria.foto_uri" class="image-responsive">
+      <i class="icon ion-image" ng-hide="auditoria.foto_uri" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+    </div>
+      <form id="cartel-form2" class="list">
+      <label class="item item-input" id="cartel-input11">
+        <span class="input-label">Imágen</span>
+        <input type="text" ng-model="auditoria.foto_uri" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input11">
+        <span class="input-label">Latitud</span>
+        <input type="text" placeholder="Latitud" ng-model="auditoria.foto_lat" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input11">
+        <span class="input-label">Longitud</span>
+        <input type="text" placeholder="Longitud" ng-model="auditoria.foto_long" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input4">
+        <span class="input-label">Cliente</span>
+        <input type="text" placeholder="Cliente" ng-model="cliente.razon_social" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input5">
+        <span class="input-label">Campaña</span>
+        <input type="text" placeholder="Campaña" ng-model="campana.nombre" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input6">
+        <span class="input-label">Dirección</span>
+        <input type="text" placeholder="Dirección" ng-model="auditoria.direccion" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input7">
+        <span class="input-label">Soporte</span>
+        <input type="text" placeholder="Soporte" ng-model="soporte.nombre" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input8">
+        <span class="input-label">Empresa</span>
+        <input type="text" placeholder="Empresa de vía pública" ng-model="empresa.nombre" readonly="readonly">
+      </label>
+      <label class="item item-input" id="cartel-input9">
+        <span class="input-label">Estado</span>
+       <input type="text" placeholder="Estado" ng-model="estado.nombre" readonly="readonly">
+      </label>
+      <label class="item item-input item-stacked-label" id="cartel-input10">
+        <span class="input-label">Observaciones</span>
+        <input type="text" placeholder="Observaciones" ng-model="auditoria.observaciones" readonly="readonly">
+      </label>
+     
+    </form>
+  </ion-content>
+</ion-view>
